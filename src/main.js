@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Fullpage from '@/components/Fullpage'
+import page1 from '@/components/page1'
 
 Vue.config.productionTip = false
 
@@ -13,6 +14,9 @@ new Vue({
     bgColor: ['#c09','#c90','#09c','#0c9'],
   },
   methods: {},
-  components: { Fullpage },
+  components: {
+    Fullpage,
+    page1,
+  },
   // template: '<App/>'
 })

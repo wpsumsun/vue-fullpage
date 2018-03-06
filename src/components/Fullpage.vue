@@ -1,6 +1,10 @@
 <template>
   <div class="wrap" @wheel="wheelEvent($event)">
-    <transition-group tag="div" :name="name">
+    <transition-group
+      tag="div"
+      :name="name"
+      @enter="enterStatus"
+      @leave="leaveStatus">
       <div
         class="page"
         v-for="(item, index) in pages"
@@ -9,6 +13,7 @@
         @transitionend="end"
         :key="item">
         {{ item }}
+        <slot :name="'slot-'+index" :status="status" :curIndex="curIndex"></slot>
       </div>
     </transition-group>
   </div>
@@ -35,9 +40,16 @@
         name: '',
         canWheel: true,
         endCound: 0,
+        status: '',
       }
     },
     methods: {
+      enterStatus() {
+        this.status = 'enter'
+      },
+      leaveStatus() {
+        this.status = 'leave'
+      },
       wheelEvent(e) {
         if (!this.canWheel) { return }
         this.canWheel = false
@@ -61,7 +73,6 @@
         }
       },
       end() {
-        console.log('end')
         this.endCound++;
         if (this.endCound === 2) {
           this.canWheel = true

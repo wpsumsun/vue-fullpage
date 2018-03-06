@@ -22,7 +22,11 @@
 
 <body>
   <div id="app">
-    <fullpage :pages="pages" :bg-color="bgColor"></fullpage>
+    <fullpage :pages="pages" :bg-color="bgColor">
+      <template slot="slot-0" slot-scope="props">
+        <page1 :status="props.status" :index="props.curIndex"></page1>
+      </template>
+    </fullpage>
   </div>
   <!-- built files will be auto injected -->
 </body>
